@@ -43,11 +43,11 @@ int main()
 
     while (!procId)
     {
-        printf("Find Proc Id\n");
+        printf("Find Proc Id:\n");
         procId = GetProcId(procName);
         Sleep(30);
     }
-    printf("Proc Id:\n",procId);
+    printf("Proc Id:%i\n",procId);
     HANDLE hProc = OpenProcess(PROCESS_ALL_ACCESS, 0, procId);
 
     if (hProc && hProc != INVALID_HANDLE_VALUE)
@@ -59,7 +59,7 @@ int main()
         auto _adresslla = GetProcAddress(GetModuleHandleA("kernel32.dll"), "LoadLibraryA");
         if (!_adresslla)
         {
-            printf("Error _LoadLibraryA:\n", _adresslla);
+            printf("Error _LoadLibraryA:%p\n", _adresslla);
         }
         HANDLE hThread = CreateRemoteThread(hProc, 0, 0, (LPTHREAD_START_ROUTINE)_adresslla, loc, 0, 0);
         
